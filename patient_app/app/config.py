@@ -1,14 +1,17 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    DB_USER: str = "postgres"
-    DB_PASSWORD: str = "admin"
-    DB_HOST: str = "localhost"
-    DB_PORT: str = "5432"
-    DB_NAME: str = "patient_db"
-    DATABASE_URL: str = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}?client_encoding=utf8"
+    DB_USER: str
+    DB_PASSWORD: str
+    DB_HOST: str
+    DB_PORT: str
+    DB_NAME: str
+
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}?client_encoding=utf8"
 
     class Config:
-        env_file = ".env"  # Load environment variables from a .env file || Carregar variáveis de ambiente de um arquivo .env 
+        env_file = ".env"
 
 settings = Settings()
