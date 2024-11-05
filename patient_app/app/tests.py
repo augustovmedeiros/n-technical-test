@@ -2,8 +2,8 @@ import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from main import app
-from database import Base, get_db
+from .main import app
+from .database import Base, get_db
 
 # Set up SQLite database for testing || Configurar banco de dados SQLite para testes
 DATABASE_URL = "sqlite:///./patient.db"
