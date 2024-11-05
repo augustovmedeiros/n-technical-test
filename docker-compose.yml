@@ -15,7 +15,7 @@ services:
     environment:
       DB_USER: username
       DB_PASSWORD: password
-      DB_HOST: db
+      DB_HOST: 127.0.0.1
       DB_PORT: 5432
       DB_NAME: patient_db
     ports:
