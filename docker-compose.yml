@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: patient_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  patient_app:
+    build: ./patient_app
+    environment:
+      DB_USER: username
+      DB_PASSWORD: password
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: patient_db
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
